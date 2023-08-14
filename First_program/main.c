@@ -47,8 +47,21 @@ int main() {
     scanf("%d %lf %s", &x, &num, text);
     printf("%d %lf %s", x, num, text);
 }*/
+/*
 int main(){
     printf("\"HELLO MUNDOO!\"\n");
     printf("\"HELLO MUNDOO!\"\t TAAB");
+    return 0;
+}*/
+int main(){
+    float sal_min;
+    float sal_pessoa;
+
+    printf("Salario minimo: ");
+    scanf("%f",&sal_min);
+    printf("Salario da pessoa: ");
+    scanf("%f",&sal_pessoa);
+    printf("Esta pessoa ganha %f salario(os) minimo(os)",sal_pessoa/sal_min);
+
     return 0;
 }
