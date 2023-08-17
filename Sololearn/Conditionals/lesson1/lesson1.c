@@ -47,7 +47,7 @@ int main(){
     return 0;
 }
 */
-/*
+
 int main(){
     int resp;
     float num1,num2,num3;
@@ -64,4 +64,3 @@ int main(){
     }
     return 0;
 }
-*/
