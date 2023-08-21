@@ -9,10 +9,6 @@ int main(){
     do{
        printf("[x] SAIR | [+] SOMAR |  [-] SUBTRAIR |  [*] MUTIPLICAR | [/] DIVIDIR\n");
        resp=getchar();
-       printf("Numero: ");
-       scanf("%f",&num1);
-       printf("Numero: ");
-       scanf("%f",&num2);
 
        switch (resp)
        {
@@ -20,15 +16,31 @@ int main(){
             printf("SAINDO ...\n");
             break;
         case '+':
+            printf("Numero: ");
+            scanf("%f",&num1);
+            printf("Numero: ");
+            scanf("%f",&num2);
             printf("A soma entre %f e %f: %f\n",num1,num2,(num1+num2));
             break;
         case '-':
+            printf("Numero: ");
+            scanf("%f",&num1);
+            printf("Numero: ");
+            scanf("%f",&num2);
             printf("A subtracao entre %f e %f: %f\n",num1,num2,(num1-num2));
             break;
         case '*':
+            printf("Numero: ");
+            scanf("%f",&num1);
+            printf("Numero: ");
+            scanf("%f",&num2);
             printf("A multiplicacao entre %f e %f: %f\n",num1,num2,(num1*num2));
             break;
         case '/':
+            printf("Numero: ");
+            scanf("%f",&num1);
+            printf("Numero: ");
+            scanf("%f",&num2);
             printf("A divisao entre %f e %f: %f\n",num1,num2,(num1/num2));
             break;
         default:
