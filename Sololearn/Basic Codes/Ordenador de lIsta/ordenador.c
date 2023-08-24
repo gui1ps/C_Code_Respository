@@ -1,0 +1,49 @@
+// ESSE CÓDIGO REORDENA A LISTA NUMA ORDEM CRESCENTE
+
+#include <stdio.h>
+
+void printel(float* x, int size);//FUNÇÃO QUE PRINTA OS ELEMENTOS DA LISTA
+void replaceminor(float* x, int ini,int size);
+
+int main(){
+    float num;
+    int arr_size=10;
+    float arr[arr_size];
+
+    for(int i=0;i<arr_size;i++){
+        printf("Numero: ");
+        scanf("%f",&num);
+        if(num<0)break;
+        else arr[i]=num;
+    }
+
+    printel(arr,arr_size);
+
+    for(int k=0;k<arr_size;k++){//PARA ENTENDER A LÓGICA DESTE LOOP É RECOMENDADO LER O FUNCIONAMENTO DA FUNÇÃO replaceminor
+        replaceminor(arr,k,arr_size);//A FUNÇÃO APLICARÁ COMO VALOR INICIAL DENTRO DA FUNÇÃO replaceminor TODAS AS SUA POSIÇÕES, GARANTINDO A ORDEM CRESCENTE NA LISTA
+    }
+    
+    printf("--------------\n");
+    printel(arr,arr_size);
+
+    return 0;
+}
+
+void printel(float* x, int size){
+    for(int j=0;j<size;j++){//PERCORRE A LISTA BASEADO NO TAMANHO DELA, IMPRIMINDO OS VALORES ARMAENADOS
+        printf("%f\n",x[j]);
+    }
+}
+
+void replaceminor(float* x, int ini,int size){/*A LÓGICA APLICADA NA FUNÇÃO PRINCIPAL DEVE SER PENSADA DA SEGUINTE FORMA: ESSA FUNÇÃO VAI RECEBER UM VALOR INTEIRO CHAMADO INI, QUE É O VALOR INICIAL PELO QUAL AS COMPARAÇÕES SE INICIARÃO (O OBJETIVO NÃO É COMPARAR A LISTA INTEIRA DE UMA VEZ SÓ, MAS SIM DE FRAGMENTOS EM FRAGMENTOS. SE O VALOR INICIAL FOR SETADO COMO 0, O MENOR VALOR NA LISTA IRA PARA A POSIÇÃO 0, SE FOR SETADO COMO 1, O MENOR VALOR NA LISTA IRÁ PARA A POSIÇÃO 1. LEMBRANDO QUE AS COMPARAÇÕES INICIAM A PARTIR DA POSIÇÃO SETADA COMO A INICIAL)*/
+    float menor=x[ini];//O PRIMEIRO MENOR VALOR MOMENTANEO É O VALOR INICIAL
+    float temp;//TEMP É UMA VARIÁVEL QUE VAI ARMAZENAR VALORES TEMPORÁRIOS, APENAS PARA SERVIR DE SUPORTE PARA A TROCA DE VALORES ENTRE AS POSIÇÕES DE MEMÓRIA
+    for(int i=ini;i<size;i++){//ESTE LOOP VAI VARRER TODOS OS VALORES A PARTIR DA POSIÇÃO SETADA COMO A INICIAL DA LISTA
+        if(x[i]<menor){//PARA CADA VALOR SERÁ AVALIÁDO SE É MENOR QUE O MENOR VALOR ANTIGO
+            menor=x[i];//CASO SEJA, O MENOR VALOR ANTIGO É ATUALIZADO PARA O MENOR ATUAL
+            temp=x[ini];//A VARIÁVEL TEMP ARMAZENA O VALOR DA POSIÇÃO SETADA COMO INICIAL (A POSIÇÃO QUE SOFRERÁ A TROCA DE VALORES)
+            x[ini]=x[i];//AQUI OCORRE A TROCA DE VALORES, ONDE A POSIÇÃO INICIAL RECEBERÁ O NOVO MENOR VALOR
+            x[i]=temp;//JÁ AQUI, A POSIÇÃO QUE PERTENCIA AO MENOR VALOR, RECÉM DESCOBERTO, RECEBE O MENOR VALOR ANTIGO. DESSA FORMA OS MENOR VALOR  FICARA MAIS AO INICIO DA LISTA, E OS MAIORES PARA O FINAL
+        }
+    }
+}
