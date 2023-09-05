@@ -9,11 +9,16 @@ int main(){
 }
 
 float aplicarjuros(float val, int qntmes, float juros){
-    if(qntmes==0){
-        return val;
+    if(qntmes>=0 && val>=0 && juros>=0){
+        if(qntmes==0){
+            return val;
+        }
+        else{
+            val+=(val*(juros/100));
+            return aplicarjuros(val,(qntmes-1),juros);
+        }
     }
     else{
-        val+=(val*(juros/100));
-        return aplicarjuros(val,(qntmes-1),juros);
+        return 0;
     }
 }
