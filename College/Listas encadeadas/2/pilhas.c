@@ -29,8 +29,8 @@ int pilhaVazia(pilha* ptr) {
 no* criarNo(int valor) {
     no* novo = (no*)malloc(sizeof(no));
     novo->val = valor;
-    novo->prox = NULL;
-    novo->ant = NULL;
+    novo->prox=NULL;
+    novo->ant=NULL;
     novo->index=NULL;
     return novo;
 }
@@ -116,6 +116,11 @@ void sobrescrever(pilha *pilha,no* node, int val){
     }
 }
 
+void reset(pilha *ptr){
+    liberarPilha(ptr);
+    encherPilha(ptr);
+}
+
 int main() {
     pilha *pilha;
     pilha = iniciarpilha();
@@ -129,7 +134,7 @@ int main() {
         printf("\nFORMACAO ATUAL DA PILHA: \n");
         lerPilha(pilha);
         printf("\n");
-        printf("O QUE VOCE DESEJA FAZER?: \n[0] SAIR\n[1] Definir o item i como o segundo elemento a partir do topo da pilha, deixando a pilha sem seus dois elementos superiores (obs: no final, o item i sera o topo da pilha)\n[2] Definir o item i como o segundo elemento a partir do topo da pilha, deixando a pilha inalterada (obs: alterar o segundo elemento)\n[3] Dado um inteiro n, definir o item i como o n-esimo elemento a partir do topo da pilha, deixando a pilha sem seus n elementos superiores (obs: no final, o item i sera o topo da pilha)\n[4] Dado um inteiro n, definir o item i como o n-esimo elemento a partir do topo da pilha, deixando a pilha inalterada\n[5] Definir o item i como o ultimo elemento da pilha, deixando a pilha vazia (ou somente com o item i)\n[6] Definir o item i como o ultimo elemento da pilha, deixando a pilha inalterada\n[7] Definir o item i como o terceiro elemento a partir do final da pilha\n");
+        printf("O QUE VOCE DESEJA FAZER?: \n[0] SAIR\n[1] Definir o item i como o segundo elemento a partir do topo da pilha, deixando a pilha sem seus dois elementos superiores (obs: no final, o item i sera o topo da pilha)\n[2] Definir o item i como o segundo elemento a partir do topo da pilha, deixando a pilha inalterada (obs: alterar o segundo elemento)\n[3] Dado um inteiro n, definir o item i como o n-esimo elemento a partir do topo da pilha, deixando a pilha sem seus n elementos superiores (obs: no final, o item i sera o topo da pilha)\n[4] Dado um inteiro n, definir o item i como o n-esimo elemento a partir do topo da pilha, deixando a pilha inalterada\n[5] Definir o item i como o ultimo elemento da pilha, deixando a pilha vazia (ou somente com o item i)\n[6] Definir o item i como o ultimo elemento da pilha, deixando a pilha inalterada\n[7] Definir o item i como o terceiro elemento a partir do final da pilha\n[8] RESETAR PILHA\n");
         scanf("%d",&resp);
         switch (resp)
         {
@@ -179,13 +184,17 @@ int main() {
             //system("cls");
             break;
 
+        case 8:
+            reset(pilha);
+            //system("cls");
+            break;
+
         default:
             printf("\nCOMANDO INVÁLIDO!\n");
             //system("cls");
             break;
         }
     }while (resp!=0);
-   
-    
+
     return 0;
 }
