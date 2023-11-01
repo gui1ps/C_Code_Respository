@@ -5,17 +5,25 @@ typedef struct noh
 {
     int val;
     int nivel;
-    struct noh *proximoDoMesmoNivel;
     struct noh *esquerda;
     struct noh *direita;
+    struct noh *anterior;
 }noh;
+
+typedef struct celulaNoh{
+    int index;
+    struct celulaNoh *proximaCelula;
+    struct celulaNoh *celulaAnterior;
+    struct noh* conteudo;
+
+}celulaNoh;
 
 typedef struct escadaDeNiveis
 {
-    noh *nohUltimoNivel;
-    noh *nohDoNivelAnterior;
+    celulaNoh *nohNivel;
+    celulaNoh *nohProxNivel;
+    celulaNoh *nohDoNivelAnterior;
 }escadaDeNiveis;
-
 
 typedef struct 
 {
@@ -23,45 +31,16 @@ typedef struct
     noh *raiz;
 }arvoreBinaria;
 
-int verificarEscada(arvoreBinaria* avb){
-    if(avb->escada==NULL){
-        return 1;
-    }
-    return 0;
-}
-
-escadaDeNiveis* adicionarNovaCelula(noh* noh, arvoreBinaria* avb){
-    escadaDeNiveis* novaEscada=(escadaDeNiveis*)malloc(sizeof(escadaDeNiveis));
-    novaEscada->nohUltimoNivel=noh;
-    novaEscada->nohDoNivelAnterior=avb->escada->nohUltimoNivel;
-    return novaEscada;
-}
-
-noh* adicionarNoh(noh*ptr){
-    noh* novo=(noh*)malloc(sizeof(noh));
-    novo->proximoDoMesmoNivel=ptr;
-    return novo;
-}
-
-arvoreBinaria* iniciarArvore(){
-    arvoreBinaria* novaArvore=(arvoreBinaria*)malloc(sizeof(arvoreBinaria));
-    noh *raizDaArvore=(noh*)malloc(sizeof(noh));
-    fflush(stdin);
-    printf("VALOR PARA A RAIZ: ");
-    scanf("%d",raizDaArvore->val);
-    raizDaArvore->nivel=0;
-    novaArvore->raiz=raizDaArvore;
-    novaArvore->escada->nohUltimoNivel=raizDaArvore;
-    novaArvore->escada->nohDoNivelAnterior=NULL;
-    raizDaArvore->proximoDoMesmoNivel=NULL;
-    return novaArvore;
-}
-
-void adicionarNovoNoh(){
-    
+escadaDeNiveis* criarNovaEscada(escadaDeNiveis *ptr,celulaNoh *noh){
+    escadaDeNiveis* escadaNova=(escadaDeNiveis *)malloc(sizeof(escadaDeNiveis));
+    escadaNova->nohNivel=noh;
+    escadaNova->nohDoNivelAnterior=ptr;
+    ptr->nohProxNivel=escadaNova;
+    escadaNova->nohProxNivel=NULL;
+    return escadaNova;
 }
 
 int main(){
-    arvoreBinaria* arvoreInicial=iniciarArvore();
+
     return 0;
 }
