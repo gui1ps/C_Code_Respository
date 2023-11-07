@@ -1,46 +1,81 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct noh
-{
-    int val;
-    int nivel;
-    struct noh *esquerda;
-    struct noh *direita;
-    struct noh *anterior;
-}noh;
+typedef struct no{
+    int valor;
+    struct no *direita,*esquerda;
+    
+}no;
 
-typedef struct celulaNoh{
-    int index;
-    struct celulaNoh *proximaCelula;
-    struct celulaNoh *celulaAnterior;
-    struct noh* conteudo;
+no* iniciar(no *raiz,int num){
+    if(raiz==NULL){
+        no *aux=(no*)malloc(sizeof(no));
+        aux->valor=num;
+        aux->direita=NULL;
+        aux->esquerda=NULL;
 
-}celulaNoh;
+        return aux;
+    }
+    else{
+        if(num<raiz->valor){
+            raiz->esquerda=iniciar(raiz->esquerda,num);
+        }
+        else{
+            raiz->direita=iniciar(raiz->direita,num);
+        }
+        return raiz;
+    }
+}
 
-typedef struct escadaDeNiveis
-{
-    celulaNoh *nohNivel;
-    celulaNoh *nohProxNivel;
-    celulaNoh *nohDoNivelAnterior;
-}escadaDeNiveis;
+void imprimirV1(no *raiz){
+    if(raiz){
+        printf("%d\n",raiz->valor);
+        imprimirV1(raiz->esquerda);
+        imprimirV1(raiz->direita);
+    }
+}
 
-typedef struct 
-{
-    escadaDeNiveis* escada;
-    noh *raiz;
-}arvoreBinaria;
-
-escadaDeNiveis* criarNovaEscada(escadaDeNiveis *ptr,celulaNoh *noh){
-    escadaDeNiveis* escadaNova=(escadaDeNiveis *)malloc(sizeof(escadaDeNiveis));
-    escadaNova->nohNivel=noh;
-    escadaNova->nohDoNivelAnterior=ptr;
-    ptr->nohProxNivel=escadaNova;
-    escadaNova->nohProxNivel=NULL;
-    return escadaNova;
+void imprimirV2(no *raiz){
+    if(raiz){
+        imprimirV2(raiz->esquerda);
+        printf("%d\n",raiz->valor);
+        imprimirV2(raiz->direita);
+    }
 }
 
 int main(){
+    no *raiz=NULL;
+    int op,valor;
 
+    do{
+
+        printf("\nINSERIR [1] | IMPRIMIR [2] | SAIR [0]\n");
+        fflush(stdin);
+        scanf("%d",&op);
+
+        switch (op)
+        {
+        case 1:
+            printf("\nDIGITE UM VALOR: \n");
+            fflush(stdin);
+            scanf("%d",&valor);
+            raiz=iniciar(raiz,valor);
+            break;
+        case 2:
+            printf("\nPRIMEIRA IMPRESSAO:\n");
+            imprimirV1(raiz);
+            printf("\nSEGUNDA IMPRESSAO:\n");
+            imprimirV2(raiz);
+            printf("\n");
+            break;
+        case 0:
+            printf("SAINDO!");
+        default:
+            printf("INVÁLIDO!");
+            break;
+        }
+
+    }while (op!=0);
+    
     return 0;
 }
