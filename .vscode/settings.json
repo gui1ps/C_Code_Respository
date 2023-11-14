@@ -7,7 +7,8 @@
         "string": "c",
         "istream": "c",
         "random": "c",
-        "limits": "c"
+        "limits": "c",
+        "time.h": "c"
     },
     "cmake.configureOnOpen": false
 }
